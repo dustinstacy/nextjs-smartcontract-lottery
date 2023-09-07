@@ -40,7 +40,11 @@ const LotteryEntrance = () => {
         params: {},
     })
 
-    const { runContractFunction: enterLottery } = useWeb3Contract({
+    const {
+        runContractFunction: enterLottery,
+        isLoading,
+        isFetching,
+    } = useWeb3Contract({
         abi: abi,
         contractAddress: lotteryAddress,
         functionName: 'enterLottery',
@@ -97,8 +101,9 @@ const LotteryEntrance = () => {
                         <div>Number of entries: {numEntrants.toString()}</div>
                     </div>
                     <button
-                        className='h-[48px] w-[128px] bg-indigo-500 rounded'
+                        className='h-[48px] w-[128px] bg-indigo-500 hover:bg-orange-500 rounded'
                         onClick={handleClick}
+                        disabled={isLoading || isFetching}
                     >
                         Enter Lottery
                     </button>
